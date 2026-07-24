@@ -16,6 +16,7 @@
 <link rel="shortcut icon" href="/favicon.ico" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 <link rel="manifest" href="/site.webmanifest" />
+<link rel="stylesheet" href="https://relationshipproject.form.id/css/app.css">
 <link rel="stylesheet" href="/src/style.css">
 
 </head>
@@ -24,7 +25,7 @@
 <!-- ============ NAV ============ -->
 <header class="fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-bg/80 border-b border-black/5">
   <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-    <div class="flex items-center font-display font-semibold text-lg tracking-tight">
+    <div class="flex items-center gap-2 font-display font-semibold text-lg tracking-tight">
       <img src="/asset/logo.svg" alt="Relationship Project logo" class="h-8 w-8">
       relationship project<span class="text-accent2">.</span>
     </div>
@@ -61,11 +62,14 @@
       </div>
     </div>
     <div class="reveal reveal-right" style="transition-delay:120ms;">
-      <div class="floaty rounded-3xl aspect-[4/5] card-soft overflow-hidden">
-        <picture>
-          <source media="(min-width: 768px)" srcset="/asset/hero-desktop.avif" type="image/avif">
-          <img src="/asset/hero-mobile.avif" alt="Couple Reconnect System — workbook preview" class="w-full h-full object-cover" loading="eager" fetchpriority="high">
-        </picture>
+      <!-- ponytail: parallax-wrapper isolates scroll transform from floaty CSS animation — upgrade to CSS @property if two-transform compositing is needed -->
+      <div class="js-parallax-hero">
+        <div class="floaty rounded-3xl aspect-[4/5] card-soft overflow-hidden">
+          <picture class="block w-full h-full">
+            <source media="(min-width: 768px)" srcset="/asset/hero-desktop.avif" type="image/avif">
+            <img src="/asset/hero-mobile.avif" alt="Couple Reconnect System — workbook preview" class="w-full h-full object-cover" loading="eager" fetchpriority="high">
+          </picture>
+        </div>
       </div>
     </div>
   </div>
@@ -364,7 +368,7 @@
   </div>
   <div class="reveal reveal-up max-w-2xl mx-auto bg-white rounded-3xl card-soft p-2 sm:p-4">
 
-    <link href="https://relationshipproject.form.id/css/app.css" rel="stylesheet"/>
+    <!-- form CSS moved to <head> (BUG-4 fix: link must not be in body) -->
 
     <mengantar-form-widget id="mengantar-form-widget" url="couple-reconnect-system--complete-relationship-reconnection-workbook" domain="relationshipproject.form.id" embed="true"
     settings='{"type":"page","popupButtonText":"Klik untuk pemesanan","popupText":"Form Pemesanan","popupButtonColor":"#2e47ba","redirectTo":"https://relationshipproject.form.id","isFbPixel":"true","isHideBackground":"true","isNoMargin":"false","isGtm":"true"}'>
@@ -482,12 +486,12 @@ setTimeout(() => {
   if (typeof fbq !== 'undefined') fbq('trackCustom', 'TimeOnPage30s');
 }, 30000);
 
-/* Light parallax on hero mockup */
-const heroMock = document.querySelector('.floaty');
+/* Light parallax on hero mockup — targets wrapper, not .floaty, so CSS animation is undisturbed (BUG-1 fix) */
+const heroParallax = document.querySelector('.js-parallax-hero');
 window.addEventListener('scroll', () => {
-  if(!heroMock) return;
+  if(!heroParallax) return;
   const offset = window.scrollY * 0.06;
-  heroMock.style.transform = `translateY(${-offset}px)`;
+  heroParallax.style.transform = `translateY(${-offset}px)`;
 }, { passive: true });
 
 /* Track Lead when checkout section becomes visible */
