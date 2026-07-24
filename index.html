@@ -53,7 +53,12 @@
       </div>
     </div>
     <div class="reveal reveal-right" style="transition-delay:120ms;">
-      <div class="floaty ph rounded-3xl aspect-[4/5] card-soft"><span>Hero Mockup</span></div>
+      <div class="floaty rounded-3xl aspect-[4/5] card-soft overflow-hidden">
+        <picture>
+          <source media="(min-width: 768px)" srcset="/asset/hero-desktop.avif" type="image/avif">
+          <img src="/asset/hero-mobile.avif" alt="Couple Reconnect System — workbook preview" class="w-full h-full object-cover" loading="eager" fetchpriority="high">
+        </picture>
+      </div>
     </div>
   </div>
 </section>
