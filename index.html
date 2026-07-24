@@ -19,6 +19,27 @@
 <link rel="stylesheet" href="https://relationshipproject.form.id/css/app.css">
 <link rel="stylesheet" href="/src/style.css">
 
+<!-- ============ META PIXEL ============ -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1844334429573258');
+fbq('track', 'PageView');
+fbq('track', 'ViewContent', {
+  content_name: 'Couple Reconnect System',
+  content_ids: ['CRS-001'],
+  value: 149000,
+  currency: 'IDR'
+});
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1844334429573258&ev=PageView&noscript=1"/></noscript>
+
 </head>
 <body class="bg-bg text-primary antialiased">
 
@@ -415,21 +436,7 @@
   © <span id="year"></span> Relationship Project. Semua hak dilindungi.
 </footer>
 
-<!-- ============ META PIXEL ============ -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1844334429573258');
-fbq('track', 'PageView');
-fbq('track', 'ViewContent');
-</script>
-<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1844334429573258&ev=PageView&noscript=1"/></noscript>
+
 
 <!-- ============ APP JS ============ -->
 <script>
@@ -494,19 +501,8 @@ window.addEventListener('scroll', () => {
   heroParallax.style.transform = `translateY(${-offset}px)`;
 }, { passive: true });
 
-/* Track Lead when checkout section becomes visible */
-const checkoutSection = document.getElementById('checkout');
-if(checkoutSection){
-  const leadObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting){
-        if (typeof fbq !== 'undefined') fbq('track', 'Lead');
-        leadObserver.disconnect();
-      }
-    });
-  }, { threshold: 0.3 });
-  leadObserver.observe(checkoutSection);
-}
+/* ponytail: Lead event removed — Mengantar widget owns this on real form submit.
+   If widget is ever replaced, re-add: fbq('track','Lead') on form submit handler. */
 </script>
 
 </body>
