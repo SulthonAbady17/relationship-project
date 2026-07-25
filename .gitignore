@@ -1,0 +1,9 @@
+# Dependencies
+node_modules/
+
+# Build output — built by GitHub Actions, not committed
+dist/
+
+# Local env
+.env
+.env.local
